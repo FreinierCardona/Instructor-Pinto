@@ -4,18 +4,12 @@ public class Total {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner (System.in);
-        int valorOne;
-        int valorTwo;
-        int product;
-        double calculate;
-        int valorThree;
-        int valorFour;
-        int valorFive;
-        int valorSix; 
-        int contador;     
+        int valorOne, valorTwo, product,valorThree,valorFour,valorFive,valorSix,contador ;
+        double calculate;  
         String text;
         char letra;
         int operation;
+
         System.out.print("Para Acceder a los Ejercicios, Ingresa un Numero entero de 1-30: ");
         valorOne=scanner.nextInt();
         switch (valorOne) {
