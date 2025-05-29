@@ -15,13 +15,26 @@ public class Ejercicios {
 
         switch(numGeneral) {
             case 1:
-                System.out.println("\nEjercicio 1: Cálculo de f(n) - g(n)");
-                System.out.print("Ingrese un valor para n: ");
-                numGeneral = sc.nextInt();
-                System.out.println("f(n) = 3 * n² = " + (3 * numGeneral * numGeneral));
-                System.out.println("g(n) = 1 * n² = " + (numGeneral * numGeneral));
-                System.out.println("f(n)-g(n) = " + (3 * numGeneral * numGeneral - numGeneral * numGeneral));
-                System.out.println("Observamos que este ejemplo es de orden O(n²).");
+        System.out.print("Ingrese el valor de f(n): ");
+        double f_n = sc.nextDouble();
+
+        System.out.print("Ingrese el valor de g(n): ");
+        double g_n = sc.nextDouble();
+
+        System.out.print("Ingrese el valor de h(n): ");
+        double h_n = sc.nextDouble();
+
+        if (f_n >= g_n && g_n >= 0) {
+            double diferencia = f_n - g_n;
+            System.out.println("El resultado de f(n) - g(n) es: " + diferencia);
+            if (diferencia / h_n > 0) {
+                System.out.println("El orden de f(n) - g(n) es proporcional a h(n).");
+            } else {
+                System.out.println("El orden de f(n) - g(n) podría ser menor que h(n).");
+            }
+        } else {
+            System.out.println("Los valores ingresados no cumplen con f(n) ≥ g(n) ≥ 0.");
+        }
                 break;
             case 2:
                 System.out.println("\nEjercicio 2: Comparación de logaritmos con bases distintas");
