@@ -12,6 +12,7 @@ public class Total {
 
         System.out.print("Para Acceder a los Ejercicios, Ingresa un Numero entero de 1-30: ");
         valorOne=scanner.nextInt();
+
         switch (valorOne) {
             case 1:
                 System.out.println ("EJERCICIO 1: Distancia:");
@@ -34,7 +35,7 @@ public class Total {
                 System.out.print("Ingresa la Nota B: ");
                  valorTwo=scanner.nextInt(); 
 
-                System.out.print("Ingresa la Nota B: ");
+                System.out.print("Ingresa la Nota C: ");
                 valorThree=scanner.nextInt();
 
                  product=(valorOne+valorTwo+valorThree)/3;

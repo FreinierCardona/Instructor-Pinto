@@ -4,8 +4,7 @@ import java.util.Scanner;
 public class Ejercicios {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-
-        int numGeneral = 0, i = 0, j = 0, temp = 0, top = 0;
+         int numGeneral = 0, i = 0, j = 0, temp = 0, top = 0;
         double dec = 0.0;
         String textoGeneral = "", str = "";
         int[] vectorGeneral = null, stackGeneral = null;
