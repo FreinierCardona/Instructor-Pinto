@@ -11,6 +11,14 @@ public static String[][] ambulancia = new String[10][2];
 public static String[] muertos = new String[15];
 public static String[] funebre = {"Carro Funebre"};
 public static String[] asignacionCA= new String[10];
+public static String[] clinicas = {"Clinica 1", "Clinica 2", "Clinica 3"};
+public static int[] pacientesPorClinica = {34, 33, 33};
+public static int[] distanciaPorClinica = {55, 35, 45};
+public static int[] recorridosAmbulancia = new int[10];
+public static int[] distanciaAmbulancia = new int[10];
+public static int recorridosFunebre = 0;
+public static int distanciaFunebre = 0;
+public static HashSet<String> muertosNoRecogidos = new HashSet<>();
 public static Random random = new Random();
 
 
@@ -239,6 +247,86 @@ public static void reporteFinal() {
 
     System.out.println("--------------------------------------");
 }
+
+public static void solicitudAmbulanciasClinicas() {
+    System.out.println("SOLICITUDES DE AMBULANCIAS POR CLÍNICAS:");
+    for (int i = 0; i < clinicas.length; i++) {
+        System.out.println(clinicas[i] + " solicitó ambulancia para " + pacientesPorClinica[i] + " pacientes.");
+        System.out.println("Distancia a recorrer: " + distanciaPorClinica[i] + " km");
+
+        int ambulanciaIndex = i % ambulancia.length;
+        int conductorIndex = i % conductor.length;
+
+        if (recorridosAmbulancia[ambulanciaIndex] >= 8 || 
+            distanciaAmbulancia[ambulanciaIndex] + distanciaPorClinica[i] > 400) {
+            System.out.println("No se puede enviar la ambulancia " + ambulancia[ambulanciaIndex][0] + ": Límite excedido.");
+            continue;
+        }
+
+
+        recorridosAmbulancia[ambulanciaIndex]++;
+        distanciaAmbulancia[ambulanciaIndex] += distanciaPorClinica[i];
+
+        System.out.println("Ambulancia " + ambulancia[ambulanciaIndex][0] + " enviada con conductor " + conductor[conductorIndex][0]);
+        System.out.println("------------------------------------------");
+    }
+}
+
+public static void recogerMuertos() {
+    System.out.println("RECOGER MUERTOS CON CARRO FÚNEBRE:");
+    int conductorIndex = random.nextInt(conductor.length);
+    for (String muerto : muertos) {
+        if (muerto == null || muerto.isEmpty()) continue;
+
+        int distancia = random.nextInt(50) + 10; // distancia simulada
+        if (recorridosFunebre >= 8 || distanciaFunebre + distancia > 400) {
+            muertosNoRecogidos.add(muerto);
+            continue;
+        }
+
+        System.out.println("Muerto: " + muerto + " fue recogido por el carro fúnebre");
+        System.out.println(" - Conductor: " + conductor[conductorIndex][0] + " " + conductor[conductorIndex][1]);
+        System.out.println(" - Distancia: " + distancia + " km");
+
+        distanciaFunebre += distancia;
+        recorridosFunebre++;
+        System.out.println("--------------------------------------");
+    }
+}
+
+public static void listarMuertosNoRecogidos() {
+    System.out.println("MUERTOS NO RECOGIDOS:");
+    if (muertosNoRecogidos.isEmpty()) {
+        System.out.println("Todos fueron recogidos.");
+    } else {
+        for (String muerto : muertosNoRecogidos) {
+            System.out.println( muerto);
+        }
+    }
+}
+
+
+public static void reporteDistancias() {
+    System.out.println("DISTANCIA RECORRIDA POR VEHÍCULOS:");
+    for (int i = 0; i < ambulancia.length; i++) {
+        if (ambulancia[i][0] != null) {
+            System.out.println("Ambulancia " + ambulancia[i][0] + " recorrió " + distanciaAmbulancia[i] + " km");
+        }
+    }
+    System.out.println("Carro Fúnebre recorrió " + distanciaFunebre + " km");
+}
+
+
+public static void reporteRecorridos() {
+    System.out.println("CANTIDAD DE RECORRIDOS:");
+    for (int i = 0; i < ambulancia.length; i++) {
+        if (ambulancia[i][0] != null) {
+            System.out.println("Ambulancia " + ambulancia[i][0] + " hizo " + recorridosAmbulancia[i] + " recorridos");
+        }
+    }
+    System.out.println("Carro Fúnebre hizo " + recorridosFunebre + " recorridos");
+}
+
 }
 
 
