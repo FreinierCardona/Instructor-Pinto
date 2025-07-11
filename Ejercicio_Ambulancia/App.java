@@ -28,21 +28,21 @@ import  java.util.Scanner;
             scanner.nextLine(); 
 
             switch (option) {
-                case 1 -> Datos.registrarConductor();
-                case 2 -> Datos.registrarPacientes();
-                case 3 -> Datos.registrarAmbulancia();
-                case 4 -> Datos.registrarMuertos();
-                case 5 -> Datos.listConductor();
-                case 6 -> Datos.listPacientes();
-                case 7 -> Datos.listMuertos();
-                case 8 -> Datos.asignarCarro();
-                case 9 -> Datos.recogerPaciente();
-                case 10 -> Datos.reporteFinal();
-                case 11 -> Datos.solicitudAmbulanciasClinicas();
-                case 12 -> Datos.recogerMuertos();
-                case 13 -> Datos.listarMuertosNoRecogidos();
-                case 14 -> Datos.reporteDistancias();
-                case 15 -> Datos.reporteRecorridos();
+                case 1 -> Libreria.Datos.registrarConductor();
+                case 2 -> Libreria.Datos.registrarPacientes();
+                case 3 -> Libreria.Datos.registrarAmbulancia();
+                case 4 -> Libreria.Datos.registrarMuertos();
+                case 5 -> Libreria.Datos.listConductor();
+                case 6 -> Libreria.Datos.listPacientes();
+                case 7 -> Libreria.Datos.listMuertos();
+                case 8 -> Libreria.Datos.asignarCarro();
+                case 9 -> Libreria.Datos.recogerPaciente();
+                case 10 -> Libreria.Datos.reporteFinal();
+                case 11 -> Libreria.Datos.solicitudAmbulanciasClinicas();
+                case 12 -> Libreria.Datos.recogerMuertos();
+                case 13 -> Libreria.Datos.listarMuertosNoRecogidos();
+                case 14 -> Libreria.Datos.reporteDistancias();
+                case 15 -> Libreria.Datos.reporteRecorridos();
                 case 16 -> System.out.println("Has salido del Sistema, ¡GRACIAS!");
                 default -> System.out.println("Opción no válida. Intente de nuevo.");
             }
