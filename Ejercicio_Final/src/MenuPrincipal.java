@@ -1,6 +1,7 @@
 import java.util.Scanner;
 
 public class MenuPrincipal {
+    public static String coordinador;
 
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
@@ -8,9 +9,13 @@ public class MenuPrincipal {
         // --- INICIO DE REGISTRO SENA ---
         System.out.println("--- BIENVENIDO AL SISTEMA DE REGISTRO SENA ---");
         
+        // NOMBRE DEL COORDINADOR
+        System.out.println("Ingrese el nombre del coordinador");
+        coordinador = scan.nextLine();
+
         // Nivel 1: Regional
         Regional regional = new Regional();
-        System.out.print("\nIngrese el nombre de la Regional: ");
+        System.out.print("Ingrese el nombre de la Regional: ");
         regional.nombre = scan.nextLine();
 
         // Nivel 2: Centro
@@ -156,74 +161,13 @@ public class MenuPrincipal {
             }
         }
         
-        // ---  GENERACIÓN DE HORARIOS ---
-        System.out.println("\n--- GENERANDO HORARIOS ---");
-        generarHorarios(regional);
+        // ---  GENERACIÓN DE HORARIOS  ---
+        System.out.println("--- GENERANDO HORARIOS ---");
+        GeneradorHorarios generador = new GeneradorHorarios();
+        generador.generar(regional);
         
-        System.out.println("\n ¡REGISTRO Y HORARIOS COMPLETADOS!");
-        
-        // ---  MENÚ DE REPORTES ---
-        int opcion;
-        do {
-            System.out.println("\n--- MENÚ DE REPORTES ---");
-            System.out.println("1. Reporte de Instructores");
-            System.out.println("2. Reporte de Aprendices");
-            System.out.println("3. Reporte de Ambientes y Horarios");
-            System.out.println("0. Salir del programa");
-            System.out.print("Seleccione una opción: ");
-            opcion = scan.nextInt();
-            scan.nextLine(); // FIX: Consumir el salto de línea
-
-            switch (opcion) {
-                case 1:
-                    Reportes.reportarInstructores(regional, scan);
-                    break;
-                case 2:
-                    Reportes.reportarAprendices(regional);
-                    break;
-                case 3:
-                    Reportes.reportarAmbientesYHorarios(regional);
-                    break;
-                case 0:
-                    System.out.println("Saliendo del programa. ¡Hasta pronto!");
-                    break;
-                default:
-                    System.out.println(" Opción inválida. Intente de nuevo.");
-            }
-        } while (opcion != 0);
-
-        scan.close();
-    }
-    
-   
-    public static void generarHorarios(Regional regional) {
-        String[] dias = {"Lunes", "Martes", "Miércoles", "Jueves", "Viernes"};
-        String[] horas = {"08:00", "10:00", "12:00", "14:00", "16:00"};
-        
-        for (Centro centro : regional.centros) {
-            for (Sede sede : centro.sedes) {
-                for (Linea linea : sede.lineas) {
-                    for (ProgramaFormacion programa : linea.programas) {
-                        for (Ambiente ambiente : programa.ambientes) {
-                            for (Ficha ficha : ambiente.fichas) {
-                                Instructor instructorAsignado = programa.instructores.isEmpty() ? null : programa.instructores.get(0);
-
-                                if (instructorAsignado != null) {
-                                    String dia = dias[((int)(Math.random() * dias.length))];
-                                    String horaInicio = horas[((int)(Math.random() * horas.length))];
-                                    String horaFin = "18:00"; 
-                                    
-                                    Actividad nuevaActividad = new Actividad(ficha, ambiente, instructorAsignado, dia, horaInicio, horaFin);
-                                    
-                                    ficha.horario.add(nuevaActividad);
-                                    instructorAsignado.horario.add(nuevaActividad);
-                                    ambiente.horario.add(nuevaActividad);
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
+        // ---  MENU DE REPORTES ---
+        MenuReportes menu = new MenuReportes();
+        menu.mostrarMenu(regional, scan);
     }
 }
